@@ -17,9 +17,11 @@ from django.conf import settings
 from django.views.static import serve
 from django.contrib import admin
 from django.urls import include, path
-
+from django.conf.urls import url
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("network.urls")),
-    path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
 ]
+urlpatterns += [path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT})]
+
